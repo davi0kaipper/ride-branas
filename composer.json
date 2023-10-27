@@ -1,0 +1,31 @@
+{
+    "name": "davi0kaipper/projeto",
+    "autoload": {
+        "psr-4": {
+            "Project\\": "src/",
+            "Project\\Application\\": "src/app/",
+            "Project\\Domain\\": "src/domain/",
+            "Project\\Infrastructure\\": "src/infra/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Davi Kaipper",
+            "email": "davi0kaipper@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*",
+        "phpunit/phpunit": "^10.4"
+    },
+    "require": {
+        "slim/slim": "^4.12",
+        "slim/psr7": "^1.6",
+        "ramsey/uuid": "^4.7",
+        "nesbot/carbon": "^2.71",
+        "fakerphp/faker": "^1.23",
+        "php-di/slim-bridge": "*",
+        "php-di/php-di": "^7.0",
+        "respect/validation": "^2.2"
+    }
+}
