@@ -16,14 +16,8 @@ class User
         public string $name,
         public Email $email,
         public Cpf $cpf,
-        public CarPlate $carPlate
-    )
-    {
+        public CarPlate $car_plate
+    ){
         //
     }
-
-    // public function toJson(): string
-    // {
-    //     return json_encode($this);
-    // }
 }

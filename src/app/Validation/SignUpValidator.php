@@ -6,21 +6,44 @@ use Project\Domain\DTOs\SignUpDto;
 use Project\Domain\Enums\User\UserType;
 use Respect\Validation\Validator as v;
 
-class SignUpValidator
+class SignUpValidator extends Validator
 {
-    public static function validate(SignUpDto $dto)
-    {
-        $nameValidator = v::alpha('-')->length(3, 50);
-        // $typeValidator = v::in(UserType::cases());
-        // $emailValidator = v::alpha('-')->length(3, 50);
-        // $documentValidator = v::alpha('-')->length(3, 50);
-        // $carPlateValidator = v::alpha('-')->length(3, 50);
+    public array $fields;
 
-        // $nameValidator->validate($dto->name);
-        // $typeValidator->validate($dto->name);
-        // $emailValidator->validate($dto->name);
-        // $documentValidator->validate($dto->name);
-        // $carPlateValidator->validate($dto->name);
-        return 1;
+    public array $rules;
+
+
+    public function __construct(SignUpDto $signupDto)
+    {
+        $this->fields = $this->fields($signupDto);
+        $this->rules  = $this->rules();
+    }
+
+    public function rules(): array
+    {
+        $nameValidationRules     = v::alpha('-')->length(3, 50);
+        $typeValidationRules     = v::in(UserType::backingValues());
+        $emailValidationRules    = v::email();
+        $documentValidationRules = v::cpf();
+        $carPlateValidationRules = v::regex('/[A-Z]{3}[0-9][0-9A-Z][0-9]{2}/');
+
+        return [
+            'name'      => $nameValidationRules,
+            'type'      => $typeValidationRules,
+            'email'     => $emailValidationRules,
+            'document'  => $documentValidationRules,
+            'car_plate' => $carPlateValidationRules,
+        ];
+    }
+
+    public function fields(SignUpDto $signupDto): array
+    {
+        return [
+            'name'      => $signupDto->name,
+            'type'      => $signupDto->type,
+            'email'     => $signupDto->email,
+            'document'  => $signupDto->document,
+            'car_plate' => $signupDto->car_plate,
+        ];
     }
 }

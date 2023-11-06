@@ -2,10 +2,15 @@
 
 namespace Project\Domain\Enums\User;
 
+use Project\Domain\Traits\BackingValuesTrait;
+
 enum UserType: string
 {
-    case Driver = 'driver';
+    use BackingValuesTrait;
+
+    case Driver    = 'driver';
     case Passenger = 'passenger';
+
 
     public function backingValueForDatabase(): int
     {

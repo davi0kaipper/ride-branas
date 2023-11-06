@@ -11,27 +11,28 @@ use Project\Domain\Exceptions\InvalidDocumentException;
 use Project\Domain\Exceptions\InvalidEmailException;
 use Project\Domain\Exceptions\InvalidCarPlateException;
 use Project\Domain\Exceptions\UserNotFoundException;
+use Project\Infrastructure\Configuration\Container;
 use Project\Infrastructure\Repositories\User\UserDatabaseRepository;
 use Project\Infrastructure\Repositories\User\UserRepository;
 
-class GetUser
+class GetUser implements UseCase
 {
     public string $id;
+
     public UserRepository $userRepository;
+
+
     public function __construct(string $id)
     {
-        $this->id = $id;
-        $this->userRepository = new UserDatabaseRepository();
+        $this->id             = $id;
+        $container            = Container::container();
+        $this->userRepository = $container->get(UserRepository::class);
     }
 
     public function handle(): ReadUser|string
     {
-        try {
-            $user = $this->userRepository->getById($this->id);
-            $user = new ReadUser($user);
-        } catch (UserNotFoundException $e) {
-            return $e->getMessage();
-        }
+        $user = $this->userRepository->getById($this->id);
+        $user = new ReadUser($user);
 
         return $user;
     }

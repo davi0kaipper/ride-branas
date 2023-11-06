@@ -9,6 +9,7 @@ class Cpf
         //
     }
 
+
     public function getValue(): string
     {
         return $this->value;

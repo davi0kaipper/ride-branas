@@ -6,10 +6,15 @@ use PDO;
 
 class MySQLDatabaseConnection
 {
+    public function __construct(private PDO $pdo)
+    {
+        //
+    }
+
     public function connection()
     {
         try {
-            return new PDO('mysql:host=localhost;dbname=ride_branas_project', 'root', 'root');
+            return $this->pdo;
         } catch (\Exception $e) {
             return $e->getMessage();
         }

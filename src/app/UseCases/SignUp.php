@@ -13,60 +13,61 @@ use Project\Domain\Exceptions\InvalidCarPlateException;
 use Project\Infrastructure\Repositories\User\UserDatabaseRepository;
 use Project\Infrastructure\Repositories\User\UserRepository;
 use Project\Application\Validation\SignUpValidator;
+use Project\Application\Validation\Validator;
+use Project\Domain\Exceptions\ValidationErrorException;
 
-class SignUp
+class SignUp implements UseCase
 {
     public SignUpDto $dto;
+
     public UserRepository $userRepository;
+
+    public Validator $validator;
+
+
     public function __construct(SignUpDto $dto)
     {
-        $this->dto = $dto;
+        $this->dto            = $dto;
         $this->userRepository = new UserDatabaseRepository();
+        $this->validator      = new SignUpValidator($dto);
     }
 
-    public function handle(): ReadUser|string
+    public function handle(): ReadUser
     {
-        try {
-            $this->validateDto($this->dto);
-            $this->userRepository->create($this->dto->toArray());
-            $user = $this->userRepository->getByDocument($this->dto->document);
-            $user = new ReadUser($user);
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
+        $this->validateDto();
+        $this->userRepository->create($this->dto->toArray());
+        $user = $this->userRepository->getByDocument($this->dto->document);
+        $user = new ReadUser($user);
 
         return $user;
     }
 
-    private function validateDto(SignUpDto $dto): void
+    private function validateDto(): void
     {
-        $payloadValidation = SignUpValidator::validate($dto);
+        $payloadValidation = $this->validator->validate();
+
+        if ($payloadValidation !== []) {
+            throw new ValidationErrorException($payloadValidation);
+        }
+
         UserType::from($this->dto->type);
         $documentAlreadyUsed = $this->userRepository->checkIfAlreadyExists('document', $this->dto->document);
-        $emailAlreadyUsed = $this->userRepository->checkIfAlreadyExists('email', $this->dto->email);
+        $emailAlreadyUsed    = $this->userRepository->checkIfAlreadyExists('email', $this->dto->email);
 
         if ($documentAlreadyUsed) {
-            throw new InvalidDocumentException;
+            throw new InvalidDocumentException();
         }
 
         if ($emailAlreadyUsed) {
-            throw new InvalidEmailException;
+            throw new InvalidEmailException();
         }
 
-        if ($this->dto->carPlate != null) {
-            $carPlateAlreadyUsed = $this->userRepository->checkIfAlreadyExists('car_plate', $this->dto->carPlate);
+        if ($this->dto->car_plate != null) {
+            $carPlateAlreadyUsed = $this->userRepository->checkIfAlreadyExists('car_plate', $this->dto->car_plate);
 
             if ($carPlateAlreadyUsed) {
-                throw new InvalidCarPlateException;
+                throw new InvalidCarPlateException();
             }
         }
-    }
-
-    private function createUser(SignUpDto $dto): User
-    {
-        // var_dump($dto); die;
-        $this->userRepository->create($this->dto->toArray());
-
-        return $this->userRepository->getByDocument($this->dto->document);
     }
 }

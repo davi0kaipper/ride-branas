@@ -1,1 +1,0 @@
-{"user":{"id":"11bb1966-73a0-11ee-b17e-00155d564f48","type":"passenger","name":"Davi Kaipper","email":"davi0kaipper@gmail.com","cpf":"100","carPlate":null}}

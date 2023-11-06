@@ -2,11 +2,6 @@
 
 namespace Project\Domain\DTOs;
 
-use DateTime;
-use Project\Domain\ValueObjects\CarPlate;
-use Project\Domain\ValueObjects\Cpf;
-use UserType;
-
 class SignUpDto
 {
     public function __construct(
@@ -14,11 +9,11 @@ class SignUpDto
         public string $type,
         public string $email,
         public string $document,
-        public string|null $carPlate,
-    )
-    {
+        public string|null $car_plate,
+    ){
         //
     }
+
 
     public function toArray(): array
     {

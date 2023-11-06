@@ -11,7 +11,6 @@ class Email
         if (! filter_var($value, FILTER_VALIDATE_EMAIL)) {
             throw new InvalidEmailException();
         }
-
     }
 
     public function getValue(): string
