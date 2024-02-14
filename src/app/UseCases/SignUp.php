@@ -2,6 +2,7 @@
 
 namespace Project\Application\UseCases;
 
+use Project\Infrastructure\Configuration\Container;
 use Exception;
 use Project\Domain\DTOs\SignUpDto;
 use Project\Domain\Entities\User\User;
@@ -18,17 +19,15 @@ use Project\Domain\Exceptions\ValidationErrorException;
 
 class SignUp implements UseCase
 {
-    public SignUpDto $dto;
-
     public UserRepository $userRepository;
 
     public Validator $validator;
 
 
-    public function __construct(SignUpDto $dto)
+    public function __construct(public SignUpDto $dto)
     {
         $this->dto            = $dto;
-        $this->userRepository = new UserDatabaseRepository();
+        $this->userRepository = Container::container()->get(UserRepository::class);
         $this->validator      = new SignUpValidator($dto);
     }
 

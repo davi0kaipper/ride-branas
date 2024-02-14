@@ -21,6 +21,7 @@ return array(
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Psr\\Clock\\' => array($vendorDir . '/psr/clock/src'),
+    'Project\\Tests\\' => array($baseDir . '/src/tests'),
     'Project\\Infrastructure\\' => array($baseDir . '/src/infra'),
     'Project\\Domain\\' => array($baseDir . '/src/domain'),
     'Project\\Application\\' => array($baseDir . '/src/app'),

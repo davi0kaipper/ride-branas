@@ -20,11 +20,7 @@ class Container
     {
         $containerBuilder = new ContainerBuilder();
 
-        $pdoArgs = [
-            'mysql:host=localhost;dbname=ride_branas_project',
-            'root',
-            'root',
-        ];
+        $pdoArgs = ['mysql:host=127.0.0.1;dbname=ride_branas_project','root','root'];
 
         $containerBuilder->addDefinitions(
             [

@@ -3,7 +3,7 @@
         'name' => 'davi0kaipper/projeto',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'c28cb76577a0083ce040f8c0e4e3de1d8d6f04b9',
+        'reference' => 'd3cda182f356fc5341d49646d5c27f167422edff',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'davi0kaipper/projeto' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'c28cb76577a0083ce040f8c0e4e3de1d8d6f04b9',
+            'reference' => 'd3cda182f356fc5341d49646d5c27f167422edff',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

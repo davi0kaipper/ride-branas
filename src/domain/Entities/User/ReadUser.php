@@ -5,17 +5,11 @@ namespace Project\Domain\Entities\User;
 class ReadUser
 {
     public string $id;
-
     public string $type;
-
     public string $name;
-
     public string $email;
-
     public string $cpf;
-
     public string|null $car_plate;
-
 
     public function __construct(User $user)
     {

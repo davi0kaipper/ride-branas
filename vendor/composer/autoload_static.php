@@ -44,6 +44,7 @@ class ComposerStaticInit07faa1a1300e06fb8b32d8edf6688b9c
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'Psr\\Clock\\' => 10,
+            'Project\\Tests\\' => 14,
             'Project\\Infrastructure\\' => 23,
             'Project\\Domain\\' => 15,
             'Project\\Application\\' => 20,
@@ -142,6 +143,10 @@ class ComposerStaticInit07faa1a1300e06fb8b32d8edf6688b9c
         'Psr\\Clock\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/clock/src',
+        ),
+        'Project\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/tests',
         ),
         'Project\\Infrastructure\\' => 
         array (
